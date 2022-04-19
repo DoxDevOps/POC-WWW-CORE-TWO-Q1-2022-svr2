@@ -67,12 +67,12 @@ for site_id in cluster['site']:
                 'ip_address'] + " 'cd /var/www/BHT-Core/apps/ART && ./art_setup.sh'"
             os.system(run_art_script)
             result = Connection("" + site['username'] + "@" + site['ip_address'] + "").run(
-                'cd /var/www/html/BHT-Core/apps/ART && git describe', hide=True)
+                'cd /var/www/BHT-Core/apps/ART && git describe', hide=True)
             msg = "{0.stdout}"
 
             version = msg.format(result).strip()
 
-            art_version = "v4.14.4-beta"
+            art_version = "v4.15.3"
 
             if art_version == version:
                 msgx = "Hi there,\n\nDeployment of ART to " + version + " for " + site[
@@ -98,7 +98,7 @@ for site_id in cluster['site']:
             # make sure we are sending the alert at the last pint attempt
             if count == 3:
                 for recipient in recipients:
-                    msg = "Hi there,\n\nDeployment of ART to v4.14.4-beta for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
+                    msg = "Hi there,\n\nDeployment of ART to v4.15.3 for " + site['name'] + " failed to complete after several connection attempts.\n\nThanks!\nEGPAF HIS."
                     params = {
                         "api_key": os.getenv('API_KEY'),
                         "recipient": recipient,
